@@ -2,7 +2,6 @@
 <html lang="ko">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -11,8 +10,7 @@
                    maximum-scale=1.0,
                    user-scalable=no">
 
-    <title>Our Special Day</title>
-
+    <title>A Special Invitation</title>
 
     <style>
 
@@ -20,10 +18,8 @@
             box-sizing: border-box;
         }
 
-
         html,
         body {
-
             margin: 0;
             padding: 0;
 
@@ -32,7 +28,7 @@
 
             overflow: hidden;
 
-            background: #000;
+            background: #f5f0e8;
         }
 
 
@@ -43,7 +39,7 @@
         .slider {
 
             width: 100vw;
-            height: 100dvh;
+            height: 100vh;
 
             display: flex;
 
@@ -51,7 +47,6 @@
             overflow-y: hidden;
 
             scroll-snap-type: x mandatory;
-
             scroll-behavior: smooth;
 
             -webkit-overflow-scrolling: touch;
@@ -71,36 +66,19 @@
 
         .page {
 
-            /*
-             * 처음에는 모든 페이지를 만들어 두지만
-             * 공개되지 않은 페이지는 숨긴다.
-             */
-
             flex: 0 0 100vw;
 
             width: 100vw;
-            height: 100dvh;
+            height: 100vh;
 
             scroll-snap-align: start;
 
-            scroll-snap-stop: always;
-
-            display: none;
+            display: flex;
 
             justify-content: center;
             align-items: center;
 
             overflow: hidden;
-        }
-
-
-        /*
-         * 공개된 페이지
-         */
-
-        .page.visible {
-
-            display: flex;
         }
 
 
@@ -110,14 +88,15 @@
 
         .page img {
 
-            display: block;
-
             width: 100%;
             height: 100%;
 
             object-fit: cover;
 
-            object-position: center center;
+            display: block;
+
+            transition:
+                opacity 0.8s ease-in-out;
         }
 
 
@@ -129,13 +108,8 @@
 
             position: fixed;
 
+            bottom: 25px;
             left: 50%;
-
-            bottom:
-                calc(
-                    25px +
-                    env(safe-area-inset-bottom)
-                );
 
             transform: translateX(-50%);
 
@@ -155,11 +129,9 @@
             border-radius: 50%;
 
             background:
-                rgba(255, 255, 255, 0.4);
+                rgba(255, 255, 255, 0.45);
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease;
+            transition: all 0.3s ease;
         }
 
 
@@ -172,19 +144,51 @@
 
 
         /* =========================
-           아이폰 세로 화면
+           스와이프 안내
         ========================= */
 
-        @media screen
-        and (max-width: 500px)
-        and (orientation: portrait) {
+        .swipe-guide {
 
-            .page img {
+            position: fixed;
 
-                width: 100vw;
-                height: 100dvh;
+            bottom: 55px;
+            left: 50%;
 
-                object-fit: cover;
+            transform: translateX(-50%);
+
+            color: white;
+
+            font-family: sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            opacity: 0.8;
+
+            z-index: 100;
+
+            animation:
+                fadeGuide 3s ease forwards;
+        }
+
+
+        @keyframes fadeGuide {
+
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            70% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
             }
 
         }
@@ -198,7 +202,7 @@
 
 
     <!-- =================================
-         스와이프 영역
+         4페이지 모바일 초대장
     ================================== -->
 
     <main
@@ -206,72 +210,49 @@
         id="slider">
 
 
-        <!-- 1 -->
+        <!-- PAGE 1 : COVER -->
+
         <section class="page">
 
             <img
-                src="Sqn_1.jpg"
-                alt="Page 1">
+                src="Inv_1.jpg"
+                alt="Cover">
 
         </section>
 
 
-        <!-- 2 -->
+        <!-- PAGE 2 : STORY -->
+
         <section class="page">
 
             <img
-                src="Sqn_2.jpg"
-                alt="Page 2">
+                src="Inv_2.jpg"
+                alt="Our Story">
 
         </section>
 
 
-        <!-- 3 -->
+        <!-- PAGE 3 : SPECIAL MOMENT -->
+
         <section class="page">
 
             <img
-                src="Sqn_3.jpg"
-                alt="Page 3">
+                src="Inv_3.jpg"
+                alt="Special Moment">
 
         </section>
 
 
-        <!-- 4 -->
+        <!-- PAGE 4 : PROPOSAL -->
+
         <section class="page">
 
             <img
-                src="Sqn_4.jpg"
-                alt="Page 4">
+                id="proposalImage"
 
-        </section>
+                src="Inv_4.jpg"
 
-
-        <!-- 5 -->
-        <section class="page">
-
-            <img
-                src="Sqn_5.jpg"
-                alt="Page 5">
-
-        </section>
-
-
-        <!-- 6 -->
-        <section class="page">
-
-            <img
-                src="Sqn_6.jpg"
-                alt="Page 6">
-
-        </section>
-
-
-        <!-- 7 -->
-        <section class="page">
-
-            <img
-                src="Sqn_7.jpg"
-                alt="Page 7">
+                alt="Proposal">
 
         </section>
 
@@ -280,20 +261,29 @@
 
 
     <!-- =================================
-         페이지 표시 점
+         페이지 표시
     ================================== -->
 
-    <div
-        class="dots"
-        id="dots">
+    <div class="dots">
 
         <div class="dot active"></div>
+
         <div class="dot"></div>
+
         <div class="dot"></div>
+
         <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+
+    </div>
+
+
+    <!-- =================================
+         스와이프 안내
+    ================================== -->
+
+    <div class="swipe-guide">
+
+        SWIPE →
 
     </div>
 
@@ -307,78 +297,351 @@
 
 
         /*
-         * 모든 시간은 한국시간(KST)
-         *
-         * 2026년 8월 1일
-         */
+           프로포즈 이미지가 변경되는 시각
 
-        const schedules = [
+           2026년 8월 1일 18:00
+           한국시간 (UTC+9)
+        */
 
-            {
-                image: "Sqn_1.jpg",
+        const changeTime =
+            new Date(
+                "2026-07-28T20:20:00+09:00"
+            );
 
-                time:
-                    "2026-07-29T00:00:00+09:00"
-            },
 
-            {
-                image: "Sqn_2.jpg",
+        /*
+           이미지 파일 이름
+        */
 
-                time:
-                    "2026-07-29T10:00:00+09:00"
-            },
+        const BEFORE_IMAGE =
+            "Inv_4.jpg";
 
-            {
-                image: "Sqn_3.jpg",
+        const AFTER_IMAGE =
+            "Inv_5.jpg";
 
-                time:
-                    "2026-07-29T11:00:00+09:00"
-            },
 
-            {
-                image: "Sqn_4.jpg",
+        /*
+           마지막 페이지 이미지 객체
+        */
 
-                time:
-                    "2026-07-29T12:00:00+09:00"
-            },
+        const proposalImage =
+            document.getElementById(
+                "proposalImage"
+            );
 
-            {
-                image: "Sqn_5.jpg",
 
-                time:
-                    "2026-07-29T13:00:00+09:00"
-            },
+        /*
+           마지막으로 적용한 상태
 
-            {
-                image: "Sqn_6.jpg",
+           "before"
+           또는
+           "after"
+        */
 
-                time:
-                    "2026-07-29T14:00:00+09:00"
-            },
+        let currentState = null;
 
-            {
-                image: "Sqn_7.jpg",
-
-                time:
-                    "2026-07-29T15:00:00+09:00"
-            }
-
-        ];
 
 
         /* =================================================
-           HTML 요소
+           AFTER 이미지 미리 로딩
+        ================================================= */
+
+        /*
+           실제 18:00이 되었을 때
+           이미지 로딩 때문에 늦어지는 것을
+           방지하기 위해 미리 받아둔다.
+        */
+
+        const preloadedAfterImage =
+            new Image();
+
+        preloadedAfterImage.src =
+            AFTER_IMAGE;
+
+
+
+        /* =================================================
+           이미지 변경 함수
+        ================================================= */
+
+        function setProposalImage(
+            state
+        ) {
+
+
+            /*
+               이미 현재 상태와 같다면
+               아무것도 하지 않는다.
+            */
+
+            if (
+                currentState === state
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               이미지 변경 전에
+               현재 상태 기록
+            */
+
+            currentState = state;
+
+
+
+            /* =========================
+               BEFORE
+            ========================= */
+
+            if (
+                state === "before"
+            ) {
+
+                proposalImage.style.opacity =
+                    "0";
+
+
+                setTimeout(function() {
+
+                    proposalImage.src =
+                        BEFORE_IMAGE;
+
+                    proposalImage.style.opacity =
+                        "1";
+
+                }, 300);
+
+
+            }
+
+
+            /* =========================
+               AFTER
+            ========================= */
+
+            else {
+
+                /*
+                   미리 로딩된 이미지가
+                   이미 준비되어 있다면
+                   바로 변경
+                */
+
+                if (
+                    preloadedAfterImage.complete
+                ) {
+
+                    proposalImage.style.opacity =
+                        "0";
+
+
+                    setTimeout(function() {
+
+                        proposalImage.src =
+                            AFTER_IMAGE;
+
+                        proposalImage.style.opacity =
+                            "1";
+
+                    }, 300);
+
+                }
+
+
+                /*
+                   아직 로딩 중이라면
+                   로딩 완료 후 변경
+                */
+
+                else {
+
+                    preloadedAfterImage.onload =
+                        function() {
+
+                            proposalImage.style.opacity =
+                                "0";
+
+
+                            setTimeout(function() {
+
+                                proposalImage.src =
+                                    AFTER_IMAGE;
+
+                                proposalImage.style.opacity =
+                                    "1";
+
+                            }, 300);
+
+                        };
+
+                }
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           현재 시간 확인
+        ================================================= */
+
+        function checkCurrentTime() {
+
+
+            const now =
+                new Date();
+
+
+            /*
+               변경 시간 이후
+            */
+
+            if (
+                now >= changeTime
+            ) {
+
+                setProposalImage(
+                    "after"
+                );
+
+            }
+
+
+            /*
+               변경 시간 이전
+            */
+
+            else {
+
+                setProposalImage(
+                    "before"
+                );
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           ① 페이지 최초 실행
+        ================================================= */
+
+        checkCurrentTime();
+
+
+
+        /* =================================================
+           ② 1초마다 시간 확인
+        ================================================= */
+
+        /*
+           setTimeout 하나에 의존하지 않는다.
+
+           브라우저가 타이머를 조금 지연시켜도
+           다음 확인에서 현재 시간을 다시 판단한다.
+        */
+
+        setInterval(
+            function() {
+
+                checkCurrentTime();
+
+            },
+            1000
+        );
+
+
+
+        /* =================================================
+           ③ 페이지가 다시 활성화될 때 확인
+        ================================================= */
+
+        /*
+           다음과 같은 상황을 대비한다.
+
+           - 화면 잠금
+           - 다른 앱으로 이동
+           - 카카오톡 인앱 브라우저
+           - Safari 백그라운드
+           - Chrome 백그라운드
+        */
+
+        document.addEventListener(
+            "visibilitychange",
+            function() {
+
+
+                /*
+                   다시 화면에 나타난 경우
+                */
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    /*
+                       현재 시간을
+                       즉시 다시 확인
+                    */
+
+                    checkCurrentTime();
+
+                }
+
+            }
+        );
+
+
+
+        /* =================================================
+           ④ 브라우저가 다시 활성화될 때
+        ================================================= */
+
+        /*
+           iOS / Android에서
+           페이지가 다시 foreground로
+           돌아오는 상황을 추가로 처리
+        */
+
+        window.addEventListener(
+            "pageshow",
+            function() {
+
+                checkCurrentTime();
+
+            }
+        );
+
+
+
+        /* =================================================
+           ⑤ 페이지가 숨겨지기 전에도 확인
+        ================================================= */
+
+        window.addEventListener(
+            "pagehide",
+            function() {
+
+                checkCurrentTime();
+
+            }
+        );
+
+
+
+        /* =================================================
+           ⑥ 스와이프 페이지 표시
         ================================================= */
 
         const slider =
             document.getElementById(
                 "slider"
-            );
-
-
-        const pages =
-            document.querySelectorAll(
-                ".page"
             );
 
 
@@ -388,291 +651,81 @@
             );
 
 
-        /* =================================================
-           이미지 미리 로딩
-        ================================================= */
-
-        /*
-         * 아직 공개되지 않은 이미지도
-         * 미리 로딩해 둔다.
-         *
-         * 실제 공개 순간에 이미지 로딩을
-         * 기다리지 않도록 하기 위함.
-         */
-
-        schedules.forEach(
-            function(item) {
-
-                const image =
-                    new Image();
-
-                image.src =
-                    item.image;
-
-            }
-        );
-
-
-        /* =================================================
-           현재 공개할 페이지 수 계산
-        ================================================= */
-
-        function getVisibleCount() {
-
-            const now =
-                new Date();
-
-
-            let count = 0;
-
-
-            schedules.forEach(
-                function(item) {
-
-                    const openTime =
-                        new Date(
-                            item.time
-                        );
-
-
-                    if (
-                        now >= openTime
-                    ) {
-
-                        count++;
-
-                    }
-
-                }
-            );
-
-
-            return count;
-
-        }
-
-
-        /* =================================================
-           페이지 공개
-        ================================================= */
-
-        function updatePages() {
-
-            const visibleCount =
-                getVisibleCount();
-
-
-            /*
-             * 공개 시간이 된 페이지를
-             * visible 상태로 변경
-             */
-
-            pages.forEach(
-                function(page, index) {
-
-                    if (
-                        index <
-                        visibleCount
-                    ) {
-
-                        page.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                    else {
-
-                        page.classList.remove(
-                            "visible"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            /*
-             * 공개된 페이지 수에 맞게
-             * 페이지 점도 표시
-             */
-
-            dots.forEach(
-                function(dot, index) {
-
-                    if (
-                        index <
-                        visibleCount
-                    ) {
-
-                        dot.style.display =
-                            "block";
-
-                    }
-
-                    else {
-
-                        dot.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
-
-
-            /*
-             * 현재 위치가 새롭게 공개된
-             * 페이지 때문에 이상해지는 것을 방지
-             */
-
-            updateActiveDot();
-
-        }
-
-
-        /* =================================================
-           현재 페이지 표시
-        ================================================= */
-
-        function updateActiveDot() {
-
-            const pageWidth =
-                window.innerWidth;
-
-
-            const currentPage =
-                Math.round(
-                    slider.scrollLeft
-                    /
-                    pageWidth
-                );
-
-
-            dots.forEach(
-                function(dot, index) {
-
-                    if (
-                        index ===
-                        currentPage
-                    ) {
-
-                        dot.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                    else {
-
-                        dot.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           최초 실행
-        ================================================= */
-
-        updatePages();
-
-
-        /* =================================================
-           1초마다 시간 확인
-        ================================================= */
-
-        /*
-         * setTimeout 한 번에 의존하지 않는다.
-         *
-         * 18:00이 되면 다음 확인에서
-         * Sqn_2가 자동으로 추가된다.
-         */
-
-        setInterval(
-            function() {
-
-                updatePages();
-
-            },
-            1000
-        );
-
-
-        /* =================================================
-           화면이 다시 활성화될 때
-        ================================================= */
-
-        /*
-         * iPhone 화면 잠금
-         * 다른 앱 이동
-         * 카카오톡 인앱 브라우저
-         * Safari 백그라운드
-         *
-         * 등의 상황을 대비한다.
-         */
-
-        document.addEventListener(
-            "visibilitychange",
-            function() {
-
-                if (
-                    document.visibilityState ===
-                    "visible"
-                ) {
-
-                    updatePages();
-
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           페이지가 다시 나타날 때
-        ================================================= */
-
-        window.addEventListener(
-            "pageshow",
-            function() {
-
-                updatePages();
-
-            }
-        );
-
-
-        /* =================================================
-           스크롤 감지
-        ================================================= */
-
         slider.addEventListener(
             "scroll",
             function() {
 
-                updateActiveDot();
 
-            }
-        );
+                /*
+                   현재 페이지 너비
+                */
+
+                const pageWidth =
+                    window.innerWidth;
 
 
-        /* =================================================
-           화면 크기가 변경될 때
-        ================================================= */
+                /*
+                   현재 페이지 계산
+                */
 
-        window.addEventListener(
-            "resize",
-            function() {
+                const currentPage =
+                    Math.round(
+                        slider.scrollLeft
+                        /
+                        pageWidth
+                    );
 
-                updatePages();
+
+                /*
+                   현재 페이지에 해당하는
+                   점만 활성화
+                */
+
+                dots.forEach(
+                    function(
+                        dot,
+                        index
+                    ) {
+
+
+                        if (
+                            index ===
+                            currentPage
+                        ) {
+
+                            dot.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                        else {
+
+                            dot.classList.remove(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                   마지막 페이지로 들어왔을 때
+                   시간 다시 확인
+
+                   혹시 브라우저가 백그라운드였다면
+                   이 시점에 최신 상태를 반영한다.
+                */
+
+                if (
+                    currentPage === 3
+                ) {
+
+                    checkCurrentTime();
+
+                }
 
             }
         );
