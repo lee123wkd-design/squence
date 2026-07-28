@@ -3,684 +3,598 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
-    <title>Our Special Day</title>
+<title>Our Special Day</title>
 
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing:border-box;
+}
 
 
-        html,
-        body {
+html,
+body {
 
-            margin: 0;
-            padding: 0;
+    margin:0;
+    padding:0;
 
-            width: 100%;
-            height: 100%;
+    width:100%;
+    height:100%;
 
-            overflow-x: hidden;
-            overflow-y: auto;
+    overflow:hidden;
 
-            background: #000;
-        }
+    background:#000;
+}
 
 
-        /* =========================
-           스와이프 영역
-        ========================= */
+/* =========================
+   슬라이드 영역
+========================= */
 
-        .slider {
 
-            width: 100vw;
-            height: 100dvh;
+.slider {
 
-            display: flex;
+    width:100vw;
 
-            overflow-x: auto;
-            overflow-y: hidden;
+    height:100dvh;
 
-            scroll-snap-type: x mandatory;
+    display:flex;
 
-            scroll-behavior: smooth;
+    overflow-x:auto;
 
-            -webkit-overflow-scrolling: touch;
+    overflow-y:hidden;
 
-            scrollbar-width: none;
-        }
+    scroll-snap-type:x mandatory;
 
+    scroll-behavior:smooth;
 
-        .slider::-webkit-scrollbar {
-            display: none;
-        }
+    -webkit-overflow-scrolling:touch;
 
+    scrollbar-width:none;
 
-        /* =========================
-           각각의 페이지
-        ========================= */
+}
 
-        .page {
 
-            /*
-             * 처음에는 모든 페이지를 만들어 두지만
-             * 공개되지 않은 페이지는 숨긴다.
-             */
+.slider::-webkit-scrollbar {
 
-            flex: 0 0 100vw;
+    display:none;
 
-            width: 100vw;
-            height: 100dvh;
+}
 
-            scroll-snap-align: start;
 
-            scroll-snap-stop: always;
 
-            display: none;
+/* =========================
+   페이지
+========================= */
 
-            justify-content: center;
-            align-items: center;
 
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+.page {
 
+    flex:0 0 100vw;
 
-        /*
-         * 공개된 페이지
-         */
+    width:100vw;
 
-        .page.visible {
+    height:100dvh;
 
-            display: flex;
-        }
+    display:flex;
 
+    justify-content:center;
 
-        /* =========================
-           이미지
-        ========================= */
+    align-items:center;
 
-        .page img {
+    scroll-snap-align:start;
 
-            display: block;
+}
 
-            width: 100%;
-            height: 100%;
 
-            object-fit: contain;
 
-            object-position: center center;
-        }
+.page img {
 
+    width:100%;
 
-        /* =========================
-           페이지 표시 점
-        ========================= */
+    height:100%;
 
-        .dots {
+    object-fit:contain;
 
-            position: fixed;
+    object-position:center;
 
-            left: 50%;
+}
 
-            bottom:
-                calc(
-                    25px +
-                    env(safe-area-inset-bottom)
-                );
 
-            transform: translateX(-50%);
 
-            display: flex;
+/* =========================
+   페이지 점
+========================= */
 
-            gap: 8px;
 
-            z-index: 100;
-        }
+.dots {
 
+    position:fixed;
 
-        .dot {
+    left:50%;
 
-            width: 6px;
-            height: 6px;
+    bottom:
+    calc(
+        25px +
+        env(safe-area-inset-bottom)
+    );
 
-            border-radius: 50%;
+    transform:translateX(-50%);
 
-            background:
-                rgba(255, 255, 255, 0.4);
+    display:flex;
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease;
-        }
+    gap:8px;
 
+    z-index:100;
 
-        .dot.active {
+}
 
-            background: white;
 
-            transform: scale(1.3);
-        }
 
+.dot {
 
-        /* =========================
-           아이폰 세로 화면
-        ========================= */
+    width:6px;
 
-        @media screen
-        and (max-width: 500px)
-        and (orientation: portrait) {
+    height:6px;
 
-            .page img {
+    border-radius:50%;
 
-                width: 100vw;
-                height: 100dvh;
+    background:
+    rgba(255,255,255,.4);
 
-                object-fit: contain;
-            }
+    transition:.3s;
 
-        }
+}
 
-    </style>
+
+
+.dot.active {
+
+    background:white;
+
+    transform:scale(1.3);
+
+}
+
+
+</style>
+
 
 </head>
+
 
 
 <body>
 
 
-    <!-- =================================
-         스와이프 영역
-    ================================== -->
-
-    <main
-        class="slider"
-        id="slider">
+<main
+class="slider"
+id="slider">
+</main>
 
 
-        <!-- 1 -->
-        <section class="page">
-
-            <img
-                src="Sqn_1.jpg"
-                alt="Page 1">
-
-        </section>
+<div
+class="dots"
+id="dots">
+</div>
 
 
-        <!-- 2 -->
-        <section class="page">
-
-            <img
-                src="Sqn_2.jpg"
-                alt="Page 2">
-
-        </section>
 
 
-        <!-- 3 -->
-        <section class="page">
-
-            <img
-                src="Sqn_3.jpg"
-                alt="Page 3">
-
-        </section>
+<script>
 
 
-        <!-- 4 -->
-        <section class="page">
-
-            <img
-                src="Sqn_4.jpg"
-                alt="Page 4">
-
-        </section>
+/* =================================================
+   이미지 공개 일정
+================================================= */
 
 
-        <!-- 5 -->
-        <section class="page">
-
-            <img
-                src="Sqn_5.jpg"
-                alt="Page 5">
-
-        </section>
+const schedules = [
 
 
-        <!-- 6 -->
-        <section class="page">
+{
+    image:"Sqn_1.jpg",
 
-            <img
-                src="Sqn_6.jpg"
-                alt="Page 6">
+    time:
+    "2026-07-29T00:00:00+09:00",
 
-        </section>
-
-
-        <!-- 7 -->
-        <section class="page">
-
-            <img
-                src="Sqn_7.jpg"
-                alt="Page 7">
-
-        </section>
+    removeAt:
+    "2026-07-29T10:00:00+09:00"
+},
 
 
-    </main>
+{
+    image:"Sqn_2.jpg",
+
+    time:
+    "2026-07-29T10:00:00+09:00"
+},
 
 
-    <!-- =================================
-         페이지 표시 점
-    ================================== -->
+{
+    image:"Sqn_3.jpg",
 
-    <div
-        class="dots"
-        id="dots">
-
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-
-    </div>
+    time:
+    "2026-07-29T11:00:00+09:00"
+},
 
 
-    <script>
+{
+    image:"Sqn_4.jpg",
+
+    time:
+    "2026-07-29T12:00:00+09:00"
+},
 
 
-        /* =================================================
-           설정
-        ================================================= */
+{
+    image:"Sqn_5.jpg",
+
+    time:
+    "2026-07-29T13:00:00+09:00"
+},
 
 
-        /*
-         * 모든 시간은 한국시간(KST)
-         *
-         * 2026년 8월 1일
-         */
+{
+    image:"Sqn_6.jpg",
 
-        const schedules = [
+    time:
+    "2026-07-29T14:00:00+09:00"
+},
 
-            {
-                image: "Sqn_1.jpg",
 
-                time:
-                    "2026-07-29T00:00:00+09:00"
-            },
+{
+    image:"Sqn_7.jpg",
 
-            {
-                image: "Sqn_2.jpg",
+    time:
+    "2026-07-29T15:00:00+09:00"
+}
 
-                time:
-                    "2026-07-29T10:00:00+09:00"
-            },
 
-            {
-                image: "Sqn_3.jpg",
+];
 
-                time:
-                    "2026-07-29T11:00:00+09:00"
-            },
 
-            {
-                image: "Sqn_4.jpg",
 
-                time:
-                    "2026-07-29T12:00:00+09:00"
-            },
 
-            {
-                image: "Sqn_5.jpg",
 
-                time:
-                    "2026-07-29T13:00:00+09:00"
-            },
+const slider =
+document.getElementById("slider");
 
-            {
-                image: "Sqn_6.jpg",
 
-                time:
-                    "2026-07-29T14:00:00+09:00"
-            },
+const dots =
+document.getElementById("dots");
 
-            {
-                image: "Sqn_7.jpg",
 
-                time:
-                    "2026-07-29T15:00:00+09:00"
+
+
+
+/* =================================================
+   현재 표시할 이미지 계산
+================================================= */
+
+
+function getVisibleImages(){
+
+
+    const now =
+    new Date();
+
+
+    return schedules.filter(
+        function(item){
+
+
+            const openTime =
+            new Date(item.time);
+
+
+
+            if(now < openTime){
+
+                return false;
+
             }
 
-        ];
 
 
-        /* =================================================
-           HTML 요소
-        ================================================= */
+            if(
+                item.removeAt &&
+                now >= new Date(item.removeAt)
+            ){
 
-        const slider =
-            document.getElementById(
-                "slider"
-            );
-
-
-        const pages =
-            document.querySelectorAll(
-                ".page"
-            );
-
-
-        const dots =
-            document.querySelectorAll(
-                ".dot"
-            );
-
-
-        /* =================================================
-           이미지 미리 로딩
-        ================================================= */
-
-        /*
-         * 아직 공개되지 않은 이미지도
-         * 미리 로딩해 둔다.
-         *
-         * 실제 공개 순간에 이미지 로딩을
-         * 기다리지 않도록 하기 위함.
-         */
-
-        schedules.forEach(
-            function(item) {
-
-                const image =
-                    new Image();
-
-                image.src =
-                    item.image;
+                return false;
 
             }
-        );
 
 
-        /* =================================================
-           현재 공개할 페이지 수 계산
-        ================================================= */
 
-        function getVisibleCount() {
+            return true;
 
-            const now =
-                new Date();
-
-
-            let count = 0;
-
-
-            schedules.forEach(
-                function(item) {
-
-                    const openTime =
-                        new Date(
-                            item.time
-                        );
-
-
-                    if (
-                        now >= openTime
-                    ) {
-
-                        count++;
-
-                    }
-
-                }
-            );
-
-
-            return count;
 
         }
+    );
 
 
-        /* =================================================
-           페이지 공개
-        ================================================= */
-
-        function updatePages() {
-
-            const visibleCount =
-                getVisibleCount();
+}
 
 
-            /*
-             * 공개 시간이 된 페이지를
-             * visible 상태로 변경
-             */
-
-            pages.forEach(
-                function(page, index) {
-
-                    if (
-                        index <
-                        visibleCount
-                    ) {
-
-                        page.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                    else {
-
-                        page.classList.remove(
-                            "visible"
-                        );
-
-                    }
-
-                }
-            );
 
 
-            /*
-             * 공개된 페이지 수에 맞게
-             * 페이지 점도 표시
-             */
 
-            dots.forEach(
-                function(dot, index) {
-
-                    if (
-                        index <
-                        visibleCount
-                    ) {
-
-                        dot.style.display =
-                            "block";
-
-                    }
-
-                    else {
-
-                        dot.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
+/* =================================================
+   페이지 생성
+================================================= */
 
 
-            /*
-             * 현재 위치가 새롭게 공개된
-             * 페이지 때문에 이상해지는 것을 방지
-             */
+function updatePages(){
 
-            updateActiveDot();
+
+    // 현재 위치 저장
+
+    const currentScroll =
+    slider.scrollLeft;
+
+
+
+    const images =
+    getVisibleImages();
+
+
+
+    slider.innerHTML="";
+
+    dots.innerHTML="";
+
+
+
+    images.forEach(
+        function(item,index){
+
+
+            const page =
+            document.createElement("section");
+
+
+            page.className="page";
+
+
+
+            const img =
+            document.createElement("img");
+
+
+            img.src =
+            item.image;
+
+
+            img.alt =
+            "Page " + (index+1);
+
+
+
+            page.appendChild(img);
+
+
+            slider.appendChild(page);
+
+
+
+
+            const dot =
+            document.createElement("div");
+
+
+            dot.className="dot";
+
+
+
+            dots.appendChild(dot);
+
+
 
         }
+    );
 
 
-        /* =================================================
-           현재 페이지 표시
-        ================================================= */
 
-        function updateActiveDot() {
+    /*
+      이미지가 삭제/추가되어도
+      가능한 위치 유지
+    */
 
-            const pageWidth =
-                window.innerWidth;
+    if(
+        slider.scrollWidth >= currentScroll
+    ){
+
+        slider.scrollLeft =
+        currentScroll;
+
+    }
 
 
-            const currentPage =
-                Math.round(
-                    slider.scrollLeft
-                    /
-                    pageWidth
+
+    updateActiveDot();
+
+
+}
+
+
+
+
+
+/* =================================================
+   현재 점 표시
+================================================= */
+
+
+function updateActiveDot(){
+
+
+    const pageWidth =
+    window.innerWidth;
+
+
+
+    const currentPage =
+    Math.round(
+        slider.scrollLeft /
+        pageWidth
+    );
+
+
+
+    const allDots =
+    document.querySelectorAll(".dot");
+
+
+
+    allDots.forEach(
+        function(dot,index){
+
+
+            if(
+                index === currentPage
+            ){
+
+                dot.classList.add(
+                    "active"
                 );
 
+            }
 
-            dots.forEach(
-                function(dot, index) {
+            else{
 
-                    if (
-                        index ===
-                        currentPage
-                    ) {
+                dot.classList.remove(
+                    "active"
+                );
 
-                        dot.classList.add(
-                            "active"
-                        );
+            }
 
-                    }
-
-                    else {
-
-                        dot.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
 
         }
+    );
 
 
-        /* =================================================
-           최초 실행
-        ================================================= */
+}
+
+
+
+
+
+/* =================================================
+   이미지 미리 로딩
+================================================= */
+
+
+schedules.forEach(
+function(item){
+
+
+    const img =
+    new Image();
+
+
+    img.src =
+    item.image;
+
+
+});
+
+
+
+
+
+/* =================================================
+   최초 실행
+================================================= */
+
+
+updatePages();
+
+
+
+
+
+/* =================================================
+   시간 체크
+================================================= */
+
+
+setInterval(
+function(){
+
+    updatePages();
+
+},
+1000
+);
+
+
+
+
+
+/* =================================================
+   스크롤 감지
+================================================= */
+
+
+slider.addEventListener(
+"scroll",
+function(){
+
+    updateActiveDot();
+
+});
+
+
+
+
+
+/* =================================================
+   화면 변경
+================================================= */
+
+
+window.addEventListener(
+"resize",
+function(){
+
+    updatePages();
+
+});
+
+
+
+
+
+document.addEventListener(
+"visibilitychange",
+function(){
+
+
+    if(
+        document.visibilityState === "visible"
+    ){
 
         updatePages();
 
-
-        /* =================================================
-           1초마다 시간 확인
-        ================================================= */
-
-        /*
-         * setTimeout 한 번에 의존하지 않는다.
-         *
-         * 18:00이 되면 다음 확인에서
-         * Sqn_2가 자동으로 추가된다.
-         */
-
-        setInterval(
-            function() {
-
-                updatePages();
-
-            },
-            1000
-        );
+    }
 
 
-        /* =================================================
-           화면이 다시 활성화될 때
-        ================================================= */
-
-        /*
-         * iPhone 화면 잠금
-         * 다른 앱 이동
-         * 카카오톡 인앱 브라우저
-         * Safari 백그라운드
-         *
-         * 등의 상황을 대비한다.
-         */
-
-        document.addEventListener(
-            "visibilitychange",
-            function() {
-
-                if (
-                    document.visibilityState ===
-                    "visible"
-                ) {
-
-                    updatePages();
-
-                }
-
-            }
-        );
+});
 
 
-        /* =================================================
-           페이지가 다시 나타날 때
-        ================================================= */
 
-        window.addEventListener(
-            "pageshow",
-            function() {
-
-                updatePages();
-
-            }
-        );
-
-
-        /* =================================================
-           스크롤 감지
-        ================================================= */
-
-        slider.addEventListener(
-            "scroll",
-            function() {
-
-                updateActiveDot();
-
-            }
-        );
-
-
-        /* =================================================
-           화면 크기가 변경될 때
-        ================================================= */
-
-        window.addEventListener(
-            "resize",
-            function() {
-
-                updatePages();
-
-            }
-        );
-
-
-    </script>
+</script>
 
 
 </body>
